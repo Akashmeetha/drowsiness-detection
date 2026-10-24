@@ -5,9 +5,9 @@ import streamlit.components.v1 as components
 st.set_page_config(page_title="Drowsiness Detection", page_icon="🚗")
 
 st.title("🚗 Driver Drowsiness Detection")
-st.write("Live Camera Demo")
+st.write("Live Eye Closure and Yawning Alert")
 
-st.warning("Allow camera access when your browser asks.")
+st.info("Click Start Camera and allow camera permission.")
 
 components.html("""
 <div style="font-family:Arial;text-align:center">
@@ -15,6 +15,9 @@ components.html("""
     style="width:100%;max-width:600px;border-radius:12px"></video>
   <p id="status">Camera not started</p>
   <button id="start">Start Camera</button>
+  <audio id="alarm" loop>
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+  </audio>
   <script>
     const video = document.getElementById('cam');
     const status = document.getElementById('status');
@@ -24,9 +27,11 @@ components.html("""
         video.srcObject = stream;
         status.textContent = 'Camera is running';
       } catch (e) {
-        status.textContent = 'Camera permission denied or unavailable';
+        status.textContent = 'Camera permission denied';
       }
     };
   </script>
 </div>
 """, height=500)
+
+st.warning("Eye and yawn detection are not active yet.")
